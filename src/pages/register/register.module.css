@@ -1,0 +1,76 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.field input {
+  flex: 1;
+  padding-right: 150px;
+}
+
+.error {
+  font-size: 14px;
+  margin-left: 10px;
+  white-space: nowrap;
+  border: 1px solid red;
+  color: red;
+  size: 20px;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  color: red;
+  font-size: 14px;
+}
+
+.errorContainer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.errorContainer li {
+  margin-bottom: 5px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+  width: 40px; /* Increased size for better visibility */
+  height: 40px; /* Increased size for better visibility */
+  border: 4px solid #ccc;
+  border-top-color: #3498db; /* Blue color for the spinner */
+  border-radius: 50%;
+}
+
+.spinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute; /* Ensure it's placed over the content */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Optional, dim the background when loading */
+  z-index: 9999; /* Ensure the spinner is on top of other elements */
+}

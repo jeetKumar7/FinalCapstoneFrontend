@@ -1,0 +1,61 @@
+.navbar {
+  border-width: 2px;
+  border-color: black;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 45px;
+}
+
+.logo img {
+  height: 25px;
+}
+
+.greetings {
+  display: flex;
+  align-items: center;
+}
+
+.greetings img {
+  margin-right: 5px;
+  width: 12px;
+  height: 12px;
+}
+
+.greetings h3,
+.greetings p {
+  margin: 0;
+}
+
+.createButton {
+  background-color: blue;
+  color: white;
+  border-radius: 12px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+}
+
+.search img {
+  margin-right: 5px;
+  width: 12px;
+  height: 12px;
+}
+
+.search input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.profile img {
+  height: 25px;
+  border-radius: 50%;
+}
