@@ -1,6 +1,6 @@
 import styles from "./dashboard.module.css";
 import Navbar from "../navbar/index.jsx";
-import Sidebar from "../Sidebar/index.jsx";
+import Sidebar from "../sidebar/index.jsx";
 export default function Dashboard() {
   return (
     <div className={styles.container}>
