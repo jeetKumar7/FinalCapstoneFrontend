@@ -54,27 +54,45 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <header>
-        <h1>Already have an account?</h1>
-        <h3>Your personal job finder is here</h3>
-      </header>
-      <form className={stylesheet.form} onSubmit={handleLogin}>
-        <input name="email" value={formData.email} type="text" placeholder="Email" onChange={handleInputChange} />
-        <p className={stylesheet.error}>{errors.email}</p>
-        <input
-          name="password"
-          value={formData.password}
-          type="password"
-          placeholder="Password"
-          onChange={handleInputChange}
-        />
-        <p className={stylesheet.error}>{errors.password}</p>
-        <button type="submit">Sign in</button>
-        <p>
-          Don&apos;t have an account? <Link to="/register">Sign up</Link>
-        </p>
-      </form>
+    <div className={stylesheet.container}>
+      <div className={stylesheet.leftSection}>
+        <div className={stylesheet.logo}>
+          <img src="/assets/cuvette.png" alt="logo" />
+        </div>
+        <img src="/assets/banner.png" alt="banner" />
+      </div>
+
+      <div className={stylesheet.rightSection}>
+        <div className={stylesheet.topRightButtons}>
+          <Link to="/register">
+            <button className={stylesheet.signupButton}>Sign Up</button>
+          </Link>
+          <Link to="/login">
+            <button className={stylesheet.loginButton}>Login</button>
+          </Link>
+        </div>
+
+        <header>
+          <h1>Login</h1>
+        </header>
+
+        <form className={stylesheet.form} onSubmit={handleLogin}>
+          <input name="email" value={formData.email} type="text" placeholder="Email" onChange={handleInputChange} />
+          <p className={stylesheet.error}>{errors.email}</p>
+          <input
+            name="password"
+            value={formData.password}
+            type="password"
+            placeholder="Password"
+            onChange={handleInputChange}
+          />
+          <p className={stylesheet.error}>{errors.password}</p>
+          <button type="submit">Sign in</button>
+          <p className={stylesheet.footer}>
+            Don&apos;t have an account? <Link to="/register">Sign up</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

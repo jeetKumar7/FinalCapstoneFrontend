@@ -2,6 +2,7 @@ import { useState } from "react";
 import { register } from "../../services";
 import { ToastContainer, toast } from "react-toastify";
 import stylesheet from "./register.module.css";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const notify = () => {
@@ -71,47 +72,63 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <header>
-        <h1>Join us Today!</h1>
-        {/* <h3>Your personal job finder is here</h3> */}
-      </header>
-      <form className={stylesheet.form} onSubmit={handleRegister}>
-        <div className={stylesheet.field}>
-          <input value={formData.name} type="text" placeholder="Name" name="name" onChange={handleInputChange} />
-          <p className={stylesheet.error}>{errors.name}</p>
+    <div className={stylesheet.container}>
+      <div className={stylesheet.leftSection}>
+        <div className={stylesheet.logo}>
+          <img src="/assets/cuvette.png" alt="logo" />
         </div>
+        <img src="/assets/banner.png" alt="banner" />
+      </div>
 
-        <input value={formData.email} name="email" type="text" placeholder="Email" onChange={handleInputChange} />
-        <p className={stylesheet.error}>{errors.email}</p>
-
-        <input value={formData.phone} name="phone" type="number" placeholder="Mobile" onChange={handleInputChange} />
-        <p className={stylesheet.error}>{errors.phone}</p>
-
-        <input
-          value={formData.password}
-          name="password"
-          type="text"
-          placeholder="Password"
-          onChange={handleInputChange}
-        />
-        <p className={stylesheet.error}>{errors.password}</p>
-
-        <div>
-          <input type="checkbox" name="tos" id="tos" />
-          <label htmlFor="tos">By Creating an account. I agree to our terms of use and privacy policy</label>
+      <div className={stylesheet.rightSection}>
+        <div className={stylesheet.topRightButtons}>
+          <Link to="/register">
+            <button className={stylesheet.signupButton}>Sign Up</button>
+          </Link>
+          <Link to="/login">
+            <button className={stylesheet.loginButton}>Login</button>
+          </Link>
         </div>
+        <header>
+          <h1>Join us Today!</h1>
+        </header>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Create Account"}
-        </button>
-        {loading && (
-          <div className={stylesheet.spinnerContainer}>
-            <div className={stylesheet.spin}></div>
-            <p>Loading Please Wait...</p>
+        <form className={stylesheet.form} onSubmit={handleRegister}>
+          <div className={stylesheet.field}>
+            <input value={formData.name} type="text" placeholder="Name" name="name" onChange={handleInputChange} />
+            <p className={stylesheet.error}>{errors.name}</p>
           </div>
-        )}
-      </form>
+
+          <input value={formData.email} name="email" type="text" placeholder="Email" onChange={handleInputChange} />
+          <p className={stylesheet.error}>{errors.email}</p>
+
+          <input value={formData.phone} name="phone" type="number" placeholder="Mobile" onChange={handleInputChange} />
+          <p className={stylesheet.error}>{errors.phone}</p>
+
+          <input
+            value={formData.password}
+            name="password"
+            type="text"
+            placeholder="Password"
+            onChange={handleInputChange}
+          />
+          <p className={stylesheet.error}>{errors.password}</p>
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Loading..." : "Create Account"}
+          </button>
+
+          <p className={stylesheet.footer}>
+            Already have an account? <Link to="/">Login</Link>
+          </p>
+          {loading && (
+            <div className={stylesheet.spinnerContainer}>
+              <div className={stylesheet.spin}></div>
+              <p>Loading Please Wait...</p>
+            </div>
+          )}
+        </form>
+      </div>
       <ToastContainer />
     </div>
   );

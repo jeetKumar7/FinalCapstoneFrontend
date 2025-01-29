@@ -1,6 +1,106 @@
-.form {
+.rightSection {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.leftSection,
+.rightSection {
+  flex: 1;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100vh;
+}
+
+.form input {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+  border: 1px solid #828282;
+}
+
+.form button {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+  border: 1px solid #ccc;
+  background-color: #1b48da;
+  color: whitesmoke;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.form p {
+  margin: 0 10px;
+  padding: 0 10px;
+  text-align: center; /* Center the text */
+}
+
+.form {
+  align-self: flex-start;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1; /* Ensure the logo is on top of the banner image */
+}
+
+.logo img {
+  width: 100px; /* Adjust the size as needed */
+}
+
+.rightSection header {
+  align-self: flex-start;
+  margin-left: 11px;
+  margin-bottom: 150px;
+}
+
+.rightSection {
+  margin-left: 90px;
+  margin-bottom: 90px;
+}
+
+.topRightButtons {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  display: flex;
+  gap: 10px;
+}
+
+.topRightButtons .loginButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #1b48da;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.topRightButtons .signupButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0%;
+  margin: 0%;
 }

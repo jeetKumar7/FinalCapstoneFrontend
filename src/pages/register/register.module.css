@@ -1,46 +1,108 @@
-.form {
+.rightSection {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-}
-
-.field {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  position: relative;
+  padding: 20px;
 }
 
-.field input {
+.leftSection,
+.rightSection {
   flex: 1;
-  padding-right: 150px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100vh;
+}
+
+.form input {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+  border: 1px solid #828282;
+}
+
+.form button {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+  border: 1px solid #ccc;
+  background-color: #1b48da;
+  color: whitesmoke;
 }
 
 .error {
-  font-size: 14px;
-  margin-left: 10px;
-  white-space: nowrap;
-  border: 1px solid red;
   color: red;
-  size: 20px;
+  font-size: 14px;
 }
 
-.errorContainer {
+.form p {
+  margin: 0 10px;
+  padding: 0 10px;
+  text-align: center; /* Center the text */
+}
+
+.form {
+  align-self: flex-start;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1; /* Ensure the logo is on top of the banner image */
+}
+
+.logo img {
+  width: 100px; /* Adjust the size as needed */
+}
+
+.rightSection header {
+  align-self: flex-start;
+  margin-left: 11px;
+  margin-bottom: 150px;
+}
+
+.rightSection {
+  margin-left: 90px;
+  margin-bottom: 90px;
+}
+
+.topRightButtons {
+  position: absolute;
+  top: 20px;
+  right: 40px;
   display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  color: red;
-  font-size: 14px;
+  gap: 10px;
 }
 
-.errorContainer ul {
-  list-style-type: none;
-  padding: 0;
+.topRightButtons .loginButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #1b48da;
+  color: whitesmoke;
+  cursor: pointer;
 }
 
-.errorContainer li {
-  margin-bottom: 5px;
+.topRightButtons .signupButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0%;
+  margin: 0%;
 }
 
 @keyframes spin {
