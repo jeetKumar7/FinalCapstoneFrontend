@@ -46,7 +46,7 @@ export default function Login() {
       if (response.token) {
         localStorage.setItem("token", response.token);
         localStorage.setItem("userId", response.id);
-        navigate(""); //HEREEEEEEEEEEEEEEEE~~~~
+        navigate("/dashboard"); //HEREEEEEEEEEEEEEEEE~~~~
       }
     } catch (error) {
       console.log(error);
