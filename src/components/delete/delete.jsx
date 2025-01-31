@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { deleteShortUrl } from "../../services";
 
 import styles from "./delete.module.css";

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styles from "./Modal.module.css";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import styles from "./modal.module.css";
 import { createShortUrl } from "../services";
 
 export default function Modal({ isOpen, onClose }) {

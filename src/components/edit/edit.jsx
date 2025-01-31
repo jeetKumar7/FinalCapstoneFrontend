@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./edit.module.css";
 import { editShortUrl } from "../../services";
 import { fetchShortUrl } from "../../services";
