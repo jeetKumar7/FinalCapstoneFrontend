@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+}
+
+.linksContainer {
+  padding: 20px;
+  flex: 1; /* Ensures it fills remaining space */
+}
+
+.linksTableContainer {
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+}
+
+.linksTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-collapse: separate; /* Use separate borders to allow border-radius */
+  border-spacing: 0; /* Remove spacing between cells */
+  border-radius: 8px; /* Apply border-radius to the table */
+  overflow: hidden; /* Ensure rounded corners are visible */
+  table-layout: fixed; /* Ensure fixed layout for columns */
+}
+
+.linksTable th {
+  background-color: #f3f7fd;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+}
+
+.linksTable td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
+.active {
+  color: green;
+}
+
+.inactive {
+  color: red;
+}

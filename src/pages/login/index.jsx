@@ -46,7 +46,7 @@ export default function Login() {
       if (response.token) {
         localStorage.setItem("token", response.token);
         localStorage.setItem("userId", response.id);
-        navigate("/dashboard"); //HEREEEEEEEEEEEEEEEE~~~~
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -67,7 +67,7 @@ export default function Login() {
           <Link to="/register">
             <button className={stylesheet.signupButton}>Sign Up</button>
           </Link>
-          <Link to="/login">
+          <Link to="/">
             <button className={stylesheet.loginButton}>Login</button>
           </Link>
         </div>

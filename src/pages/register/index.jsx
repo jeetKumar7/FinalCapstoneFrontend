@@ -85,7 +85,7 @@ export default function Register() {
           <Link to="/register">
             <button className={stylesheet.signupButton}>Sign Up</button>
           </Link>
-          <Link to="/login">
+          <Link to="/">
             <button className={stylesheet.loginButton}>Login</button>
           </Link>
         </div>

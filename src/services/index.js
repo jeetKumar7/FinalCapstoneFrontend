@@ -28,11 +28,12 @@ export const login = async (data) => {
   throw new Error("Something went wrong!");
 };
 
-export const getJobs = async () => {
-  const response = await fetch(`${BACKEND_URL}/api/job/getJobs`, {
+export const getlinks = async () => {
+  const response = await fetch(`${BACKEND_URL}/dashboard/links`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `${localStorage.getItem("token")}`,
     },
   });
   if (response.status === 200) {
@@ -41,11 +42,12 @@ export const getJobs = async () => {
   throw new Error("Something went wrong!");
 };
 
-export const getJobDetails = async (id) => {
-  const response = await fetch(`${BACKEND_URL}/api/job/getJob/${id}`, {
+export const getUserDetails = async () => {
+  const response = await fetch(`${BACKEND_URL}/api/user/getuser`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `${localStorage.getItem("token")}`,
     },
   });
   if (response.status === 200) {
@@ -54,14 +56,43 @@ export const getJobDetails = async (id) => {
   throw new Error("Something went wrong!");
 };
 
-export const createJob = async (data) => {
-  const response = await fetch(`${BACKEND_URL}/api/job/create`, {
+export const createShortUrl = async (data) => {
+  const response = await fetch(`${BACKEND_URL}/api/url/shorten`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `${localStorage.getItem("token")}`,
     },
     body: JSON.stringify(data),
+  });
+  if (response.status === 200) {
+    return response.json();
+  }
+  throw new Error("Something went wrong!");
+};
+
+export const editShortUrl = async (hash, data) => {
+  const response = await fetch(`${BACKEND_URL}/api/url/edit/${hash}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (response.status === 200) {
+    return response.json();
+  }
+  throw new Error("Something went wrong!");
+};
+
+export const fetchShortUrl = async (hash) => {
+  const response = await fetch(`${BACKEND_URL}/api/url/edit/${hash}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${localStorage.getItem("token")}`,
+    },
   });
   if (response.status === 200) {
     return response.json();

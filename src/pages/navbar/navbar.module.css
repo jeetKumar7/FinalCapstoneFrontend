@@ -1,7 +1,9 @@
 .navbar {
   border-width: 2px;
   border-color: black;
-  padding: 0 10px;
+
+  padding: 20px 20px;
+  margin: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -10,7 +12,7 @@
 }
 
 .logo img {
-  height: 25px;
+  height: 32px;
 }
 
 .greetings {
@@ -29,12 +31,23 @@
   margin: 0;
 }
 
+.searchIcon {
+  position: absolute;
+  margin-left: 5px;
+  color: #0e0c0c;
+  font-size: 16px;
+}
+
+.icon {
+  margin-right: 8px; /* Add space between the icon and the text */
+}
+
 .createButton {
   background-color: blue;
   color: white;
-  border-radius: 12px;
+  border-radius: 4px;
   border: none;
-  padding: 5px 10px;
+  padding: 10px 10px;
   cursor: pointer;
 }
 
@@ -50,7 +63,7 @@
 }
 
 .search input {
-  padding: 5px;
+  padding: 10px 10px 10px 30px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
