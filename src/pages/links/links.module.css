@@ -4,6 +4,10 @@
   height: 100vh;
 }
 
+.copyIcon {
+  cursor: pointer;
+}
+
 .mainContent {
   display: flex;
   flex: 1;

@@ -1,7 +1,53 @@
+import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css";
 import Navbar from "../navbar/index.jsx";
 import Sidebar from "../sidebar/index.jsx";
+import { getTotalClicks, getDateWiseClicks, getDeviceWiseClicks } from "../../services";
+
 export default function Dashboard() {
+  const [totalClicks, setTotalClicks] = useState(0);
+  const [dateWiseClicks, setDateWiseClicks] = useState([]);
+  const [deviceWiseClicks, setDeviceWiseClicks] = useState([]);
+
+  useEffect(() => {
+    const fetchTotalClicks = async () => {
+      try {
+        const data = await getTotalClicks();
+        setTotalClicks(data.totalClicks);
+      } catch (error) {
+        console.error("Failed to fetch total clicks:", error);
+      }
+    };
+
+    const fetchDateWiseClicks = async () => {
+      try {
+        const data = await getDateWiseClicks();
+        console.log("Date-wise Clicks:", data);
+        setDateWiseClicks(data);
+      } catch (error) {
+        console.error("Failed to fetch date-wise clicks:", error);
+      }
+    };
+
+    const fetchDeviceWiseClicks = async () => {
+      try {
+        const data = await getDeviceWiseClicks();
+        console.log("Device-wise Clicks:", data);
+        setDeviceWiseClicks(data);
+      } catch (error) {
+        console.error("Failed to fetch device-wise clicks:", error);
+      }
+    };
+
+    if (localStorage.getItem("token")) {
+      fetchTotalClicks();
+      fetchDateWiseClicks();
+      fetchDeviceWiseClicks();
+    } else {
+      console.error("User is not logged in");
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <Navbar />
@@ -11,7 +57,7 @@ export default function Dashboard() {
           {/* Header Section */}
           <div className={styles.header}>
             <h2>
-              Total Clicks <span className={styles.clickCount}>1234</span>
+              Total Clicks <span className={styles.clickCount}>{totalClicks}</span>
             </h2>
           </div>
 
@@ -21,20 +67,13 @@ export default function Dashboard() {
             <div className={styles.card}>
               <h3>Date-wise Clicks</h3>
               <div className={styles.chart}>
-                <div className={styles.bar}>
-                  <span>21-01-25</span> <div className={styles.barFill} style={{ width: "80%" }}></div>{" "}
-                  <span>1234</span>
-                </div>
-                <div className={styles.bar}>
-                  <span>20-01-25</span> <div className={styles.barFill} style={{ width: "70%" }}></div>{" "}
-                  <span>1140</span>
-                </div>
-                <div className={styles.bar}>
-                  <span>19-01-25</span> <div className={styles.barFill} style={{ width: "10%" }}></div> <span>134</span>
-                </div>
-                <div className={styles.bar}>
-                  <span>18-01-25</span> <div className={styles.barFill} style={{ width: "2%" }}></div> <span>34</span>
-                </div>
+                {dateWiseClicks.map((entry) => (
+                  <div className={styles.bar} key={`${entry._id.year}-${entry._id.month}-${entry._id.day}`}>
+                    <span>{`${entry._id.year}-${entry._id.month}-${entry._id.day}`}</span>
+                    <div className={styles.barFill} style={{ width: `${entry.count}%` }}></div>
+                    <span>{entry.count}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -42,15 +81,13 @@ export default function Dashboard() {
             <div className={styles.card}>
               <h3>Click Devices</h3>
               <div className={styles.chart}>
-                <div className={styles.bar}>
-                  <span>Mobile</span> <div className={styles.barFill} style={{ width: "50%" }}></div> <span>134</span>
-                </div>
-                <div className={styles.bar}>
-                  <span>Desktop</span> <div className={styles.barFill} style={{ width: "20%" }}></div> <span>40</span>
-                </div>
-                <div className={styles.bar}>
-                  <span>Tablet</span> <div className={styles.barFill} style={{ width: "5%" }}></div> <span>3</span>
-                </div>
+                {deviceWiseClicks.map((entry) => (
+                  <div className={styles.bar} key={entry._id}>
+                    <span>{entry._id}</span>
+                    <div className={styles.barFill} style={{ width: `${entry.count}%` }}></div>
+                    <span>{entry.count}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

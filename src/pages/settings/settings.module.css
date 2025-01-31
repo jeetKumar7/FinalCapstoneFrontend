@@ -1,0 +1,82 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 500px;
+  /* justify-content: space-between;
+  padding: 20px; 
+  border-radius: 10px;  */
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label {
+  flex: 1;
+  font-size: 16px;
+}
+
+.input {
+  flex: 2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.saveButton {
+  background-color: #2a6cf0;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* justify-content: center; */
+  margin-top: 40px;
+  align-items: center;
+  padding: 20px;
+  flex: 1; /* Ensures it fills remaining space */
+}
+.editContainer button {
+  width: 100%;
+  max-width: 500px;
+}

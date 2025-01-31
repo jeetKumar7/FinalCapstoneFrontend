@@ -4,4 +4,6 @@ import Dashboard from "./dashboard/index.jsx";
 import Navbar from "./navbar/index.jsx";
 import Sidebar from "./sidebar/index.jsx";
 import Links from "./links/index.jsx";
-export { Login, Register, Dashboard, Navbar, Sidebar, Links };
+import Analytics from "./analytics/index.jsx";
+import Settings from "./settings/index.jsx";
+export { Login, Register, Dashboard, Navbar, Sidebar, Links, Analytics, Settings };
