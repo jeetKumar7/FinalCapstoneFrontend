@@ -5,7 +5,7 @@ import Sidebar from "../sidebar/index.jsx";
 import { getlinks } from "../../services";
 
 import styles from "./links.module.css";
-import Modal from "../../components/edit/edit.jsx";
+import EditModal from "../../components/edit/edit.jsx";
 import DeleteModal from "../../components/delete/delete.jsx";
 
 import { MdEdit } from "react-icons/md";
@@ -138,7 +138,7 @@ export default function Links() {
           </div>
         </div>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} hash={currentHash} />
+      <EditModal isOpen={isModalOpen} onClose={closeModal} hash={currentHash} />
       <DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} hash={currentDeleteHash} />
     </div>
   );

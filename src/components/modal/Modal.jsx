@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import styles from "./modal.module.css";
-import { createShortUrl } from "../services";
+import { createShortUrl } from "../../services";
 
 export default function Modal({ isOpen, onClose }) {
-  const [remarks, setRemarks] = useState("");
   const [linkExpiration, setLinkExpiration] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -90,9 +89,7 @@ export default function Modal({ isOpen, onClose }) {
         </div>
 
         <div className={styles.footer}>
-          <button className={styles.clearButton} onClick={() => setRemarks("")}>
-            Clear
-          </button>
+          <button className={styles.clearButton}>Clear</button>
           <button className={styles.createButton} onClick={handleSubmit}>
             Create new
           </button>

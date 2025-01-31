@@ -4,7 +4,7 @@ import styles from "./edit.module.css";
 import { editShortUrl } from "../../services";
 import { fetchShortUrl } from "../../services";
 
-export default function Modal({ isOpen, onClose, hash }) {
+export default function EditModal({ isOpen, onClose, hash }) {
   const [linkExpiration, setLinkExpiration] = useState(true);
 
   const [formData, setFormData] = useState({

@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
 import { getUserDetails } from "../../services";
 import { useEffect, useState } from "react";
-import Modal from "../../components/Modal";
+import Modal from "../../components/modal/Modal";
 export default function Navbar() {
   const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
