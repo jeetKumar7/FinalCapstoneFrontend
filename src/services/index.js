@@ -99,3 +99,17 @@ export const fetchShortUrl = async (hash) => {
   }
   throw new Error("Something went wrong!");
 };
+
+export const deleteShortUrl = async (hash) => {
+  const response = await fetch(`${BACKEND_URL}/api/url/delete/${hash}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${localStorage.getItem("token")}`,
+    },
+  });
+  if (response.status === 200) {
+    return response.json();
+  }
+  throw new Error("Something went wrong! in frontend");
+};

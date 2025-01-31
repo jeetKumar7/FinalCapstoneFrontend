@@ -17,13 +17,14 @@ export default function Modal({ isOpen, onClose, hash }) {
     if (hash) {
       const fetchData = async () => {
         try {
-          const response = await fetchShortUrl(hash);
-          const data = await response.json();
+          const data = await fetchShortUrl(hash);
+          // const data = await response.json();
           setFormData({
             destinationUrl: data.destinationUrl,
             remarks: data.remarks,
             expirationTime: data.expirationTime,
           });
+          console.log("Short URL fetched:", data);
         } catch (error) {
           console.error("Failed to fetch short URL:", error);
         }

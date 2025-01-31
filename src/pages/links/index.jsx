@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import Navbar from "../navbar/index.jsx";
 import Sidebar from "../sidebar/index.jsx";
+
 import { getlinks } from "../../services";
+
 import styles from "./links.module.css";
 import Modal from "../../components/edit/edit.jsx";
+import DeleteModal from "../../components/delete/delete.jsx";
 
 import { MdEdit } from "react-icons/md";
 import { LuCopy } from "react-icons/lu";
@@ -15,7 +18,19 @@ export default function Links() {
   const [sortOrder, setSortOrder] = useState("asc");
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const [currentHash, setCurrentHash] = useState(null);
+  const [currentDeleteHash, setCurrentDeleteHash] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const openDeleteModal = (hash) => {
+    setCurrentDeleteHash(hash);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setCurrentDeleteHash(null);
+  };
 
   const openModal = (hash) => {
     setIsModalOpen(true);
@@ -108,7 +123,7 @@ export default function Links() {
                       </td>
                       <td>
                         <MdEdit className={styles.editIcon} onClick={() => openModal(link.hash)} />
-                        <RiDeleteBinLine className={styles.deleteIcon} />
+                        <RiDeleteBinLine className={styles.deleteIcon} onClick={() => openDeleteModal(link.hash)} />
                         {/* <button>Delete</button> */}
                       </td>
                     </tr>
@@ -124,6 +139,7 @@ export default function Links() {
         </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} hash={currentHash} />
+      <DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} hash={currentDeleteHash} />
     </div>
   );
 }
