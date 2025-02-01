@@ -72,7 +72,7 @@ export default function Analytics() {
                 <th>Original Link</th>
                 <th>Short Link</th>
                 <th>IP Address</th>
-                <th>Device</th>
+                <th>User Device</th>
               </tr>
             </thead>
             <tbody>

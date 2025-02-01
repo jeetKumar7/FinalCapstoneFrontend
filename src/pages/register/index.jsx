@@ -23,6 +23,12 @@ export default function Register() {
 
   const [errors, setErrors] = useState({});
 
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
   const handleInputChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
@@ -58,6 +64,8 @@ export default function Register() {
     ) {
       setErrors({ ...errors, password: "Invalid Password" });
     }
+
+    if (formData.password !== confirmPassword) setErrors.confirmPassword = "Passwords do not match";
 
     try {
       const response = await register(formData);
@@ -113,6 +121,15 @@ export default function Register() {
             onChange={handleInputChange}
           />
           <p className={stylesheet.error}>{errors.password}</p>
+
+          <input
+            value={confirmPassword} // Separate state for confirmPassword
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
+            onChange={handleConfirmPasswordChange}
+          />
+          <p className={stylesheet.error}>{errors.confirmPassword}</p>
 
           <button type="submit" disabled={loading}>
             {loading ? "Loading..." : "Create Account"}
