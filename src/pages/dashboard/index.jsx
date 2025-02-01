@@ -48,6 +48,17 @@ export default function Dashboard() {
     }
   }, []);
 
+  const formatDateId = (dateId) => {
+    if (!dateId) return "";
+    const { year, month, day } = dateId;
+    const date = new Date(year, month - 1, day); // month is 0-based in JavaScript
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   const deviceNameMapping = {
     phone: "Mobile",
     desktop: "Desktop",
@@ -75,7 +86,7 @@ export default function Dashboard() {
               <div className={styles.chart}>
                 {dateWiseClicks.map((entry) => (
                   <div className={styles.bar} key={entry._id}>
-                    <span>{entry._id}</span>
+                    <span>{formatDateId(entry._id)}</span>
                     <div className={styles.barFill} style={{ width: `${entry.clicks}%` }}></div>
                     <span>{entry.clicks}</span>
                   </div>
