@@ -23,6 +23,7 @@ export const getDateWiseClicks = async () => {
     },
   });
   if (response.status === 200) {
+    console.log("Date-wise Clicks in services", response);
     return response.json();
   }
   throw new Error("Something went wrong!");
