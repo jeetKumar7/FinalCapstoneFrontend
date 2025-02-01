@@ -1,0 +1,117 @@
+.navbarWrapper {
+  background-color: white; /* Change this to your desired background color */
+  padding: 12px; /* Simulate the margin effect */
+  border-bottom: 0.7px solid #cccccc68; /* Add a bottom border */
+}
+
+.navbar {
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 45px;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 73px;
+}
+
+.logo img {
+  height: 32px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.greetings {
+  display: flex;
+
+  margin-left: 30px;
+  position: relative;
+}
+
+.greetings img {
+  top: 9px;
+  margin-right: 5px;
+  width: 14px;
+  height: 14px;
+}
+
+.greetings h3,
+.greetings p {
+  margin: 0;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust the gap between elements as needed */
+}
+
+.icon {
+  margin-right: 4px; /* Add space between the icon and the text */
+  font-size: 18px;
+}
+
+.createButton p {
+  margin-top: 1.5px;
+}
+
+.createButton {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.searchIcon {
+  left: 10px;
+  position: absolute;
+  color: #0e0c0c;
+  font-size: 16px;
+}
+
+.search input {
+  padding: 8px 5px 8px 30px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-left: 2px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile img {
+  height: 25px;
+  border-radius: 50%;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}

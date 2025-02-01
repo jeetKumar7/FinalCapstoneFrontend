@@ -3,8 +3,8 @@ import { editUser, getUserDetails, deleteUser } from "../../services";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Navbar from "../navbar/index.jsx";
-import Sidebar from "../sidebar/index.jsx";
+import Navbar from "../../components/navbar/index.jsx";
+import Sidebar from "../../components/sidebar/index.jsx";
 
 import DeleteAccountModal from "../../components/deleteAccount/deleteAccount.jsx";
 

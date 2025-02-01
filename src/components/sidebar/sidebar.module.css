@@ -22,6 +22,10 @@
   padding: 0;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .menuItem {
   display: flex;
   align-items: center;
@@ -33,14 +37,29 @@
   transition: background 0.3s;
 }
 
+.menuItem span {
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+}
+
 .menuItem:hover {
-  background-color: #30475e;
+  background-color: #f3f7fd;
 }
 
 .active {
-  background-color: #007bff;
+  background-color: #f3f7fd;
 }
 
 .icon {
   font-size: 20px;
+  color: black;
+}
+
+.active span {
+  color: #2a6cf0;
+}
+
+.active .icon {
+  color: #2a6cf0;
 }

@@ -4,7 +4,29 @@
   height: 100vh;
 }
 
+.tableCell {
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.cellContent {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between text and icon */
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.urlText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1; /* Takes up remaining space */
+}
+
 .copyIcon {
+  min-width: 20px;
+
   cursor: pointer;
 }
 
@@ -12,8 +34,14 @@
   display: flex;
   flex: 1;
 }
+.sortIcon {
+  position: absolute;
+  margin-top: 1.8px;
+  cursor: pointer;
+}
 
 .linksContainer {
+  background-color: whitesmoke;
   padding: 20px;
   flex: 1; /* Ensures it fills remaining space */
 }
@@ -25,6 +53,7 @@
 
 .linksTable {
   width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-collapse: collapse;
   table-layout: fixed;
   border-collapse: separate; /* Use separate borders to allow border-radius */
@@ -39,12 +68,12 @@
   padding: 12px 15px;
   text-align: left;
   font-weight: 600;
-  border-bottom: 2px solid #ddd;
 }
 
 .linksTable td {
+  background-color: white;
   padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd40;
   vertical-align: middle;
   white-space: nowrap; /* Prevent text from wrapping */
   overflow: hidden; /* Hide overflow text */
@@ -52,9 +81,9 @@
 }
 
 .active {
-  color: green;
+  color: #1eb036;
 }
 
 .inactive {
-  color: red;
+  color: #b0901e;
 }

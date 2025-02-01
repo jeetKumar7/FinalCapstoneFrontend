@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./analytics.module.css";
 import { getAnalytics } from "../../services";
-import Navbar from "../navbar/index.jsx";
-import Sidebar from "../sidebar/index.jsx";
+import Navbar from "../../components/navbar/index.jsx";
+import Sidebar from "../../components/sidebar/index.jsx";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Analytics() {
   const [analyticsData, setAnalyticsData] = useState([]);
@@ -34,19 +36,27 @@ export default function Analytics() {
     return <div>{error}</div>;
   }
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { month: "short", day: "numeric", year: "numeric" };
+
+    const formattedDate = date.toLocaleDateString(undefined, options);
+    const formattedTime = date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+    return `${formattedDate} ${formattedTime}`;
+  };
+
   return (
     <div className={styles.container}>
       <Navbar />
       <div className={styles.mainContent}>
         <Sidebar />
         <div className={styles.analyticsContainer}>
-          <h1>Analytics</h1>
           <table className={styles.analyticsTable}>
             <thead>
               <tr>
                 <th>Timestamp</th>
-                <th>Destination URL</th>
-                <th>Short URL</th>
+                <th>Original Link</th>
+                <th>Short Link</th>
                 <th>IP Address</th>
                 <th>Device</th>
               </tr>
@@ -54,8 +64,8 @@ export default function Analytics() {
             <tbody>
               {analyticsData.map((entry) => (
                 <tr key={entry._id}>
-                  <td>{new Date(entry.timestamp).toLocaleString()}</td>
-                  <td>{entry.destinationUrl}</td>
+                  <td>{formatDate(entry.timestamp)}</td>
+                  <td>{`${BACKEND_URL}/api/url/${entry.destinationUrl}`}</td>
                   <td>{entry.shortUrl}</td>
                   <td>{entry.ipAddress}</td>
                   <td>{entry.device}</td>

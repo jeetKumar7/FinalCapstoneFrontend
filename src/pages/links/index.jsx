@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Navbar from "../navbar/index.jsx";
-import Sidebar from "../sidebar/index.jsx";
+import Navbar from "../../components/navbar/index.jsx";
+import Sidebar from "../../components/sidebar/index.jsx";
 
 import { getlinks } from "../../services";
 
@@ -8,6 +8,7 @@ import styles from "./links.module.css";
 import EditModal from "../../components/edit/edit.jsx";
 import DeleteModal from "../../components/delete/delete.jsx";
 
+import { RxCaretSort } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 import { LuCopy } from "react-icons/lu";
 import { FaSort } from "react-icons/fa";
@@ -76,6 +77,15 @@ export default function Links() {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { month: "short", day: "numeric", year: "numeric" };
+
+    const formattedDate = date.toLocaleDateString(undefined, options);
+    const formattedTime = date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+    return `${formattedDate} ${formattedTime}`;
+  };
+
   return (
     <div className={styles.container}>
       <Navbar />
@@ -87,7 +97,7 @@ export default function Links() {
               <thead>
                 <tr>
                   <th onClick={handleSort} className={styles.sortableHeader}>
-                    Date <FaSort className={styles.sortIcon} />
+                    Date <RxCaretSort className={styles.sortIcon} />
                   </th>
                   <th>Original Link</th>
                   <th>Short Link</th>
@@ -101,14 +111,17 @@ export default function Links() {
                 {links.urls.length > 0 ? (
                   links.urls.map((link) => (
                     <tr key={link._id}>
-                      <td>{new Date(link.createdAt).toLocaleString()}</td>
+                      <td>{formatDate(link.createdAt)}</td>
                       <td>{link.destinationUrl}</td>
-                      <td>
-                        {link.hash}{" "}
-                        <LuCopy
-                          className={styles.copyIcon}
-                          onClick={() => copyToClipboard(`${BACKEND_URL}/api/url/${link.hash}`)}
-                        />
+
+                      <td className={styles.tableCell}>
+                        <div className={styles.cellContent}>
+                          <span className={styles.urlText}>{`${BACKEND_URL}/api/url/${link.hash}`}</span>
+                          <LuCopy
+                            className={styles.copyIcon}
+                            onClick={() => copyToClipboard(`${BACKEND_URL}/api/url/${link.hash}`)}
+                          />
+                        </div>
                       </td>
                       <td>{link.remarks}</td>
                       <td>{link.clicks}</td>

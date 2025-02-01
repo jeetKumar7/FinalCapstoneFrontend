@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css";
-import Navbar from "../navbar/index.jsx";
-import Sidebar from "../sidebar/index.jsx";
+import Navbar from "../../components/navbar/index.jsx";
+import Sidebar from "../../components/sidebar/index.jsx";
 import { getTotalClicks, getDateWiseClicks, getDeviceWiseClicks } from "../../services";
 
 export default function Dashboard() {
@@ -48,6 +48,12 @@ export default function Dashboard() {
     }
   }, []);
 
+  const deviceNameMapping = {
+    phone: "Mobile",
+    desktop: "Desktop",
+    tablet: "Tablets",
+  };
+
   return (
     <div className={styles.container}>
       <Navbar />
@@ -83,7 +89,7 @@ export default function Dashboard() {
               <div className={styles.chart}>
                 {deviceWiseClicks.map((entry) => (
                   <div className={styles.bar} key={entry._id}>
-                    <span>{entry._id}</span>
+                    <span>{deviceNameMapping[entry._id] || entry._id}</span>
                     <div className={styles.barFill} style={{ width: `${entry.count}%` }}></div>
                     <span>{entry.count}</span>
                   </div>
