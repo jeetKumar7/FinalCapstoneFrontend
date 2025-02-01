@@ -23,6 +23,13 @@ export default function Links() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [statusSortOrder, setStatusSortOrder] = useState("asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 5;
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const openDeleteModal = (hash) => {
     setCurrentDeleteHash(hash);
@@ -172,6 +179,33 @@ export default function Links() {
                 )}
               </tbody>
             </table>
+            <div className={styles.pagination}>
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={styles.pageButton}
+              >
+                Previous
+              </button>
+
+              {[...Array(totalPages)].map((_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => handlePageChange(index + 1)}
+                  className={`${styles.pageButton} ${currentPage === index + 1 ? styles.activePage : ""}`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={styles.pageButton}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>

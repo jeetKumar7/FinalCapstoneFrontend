@@ -12,6 +12,13 @@ export default function Analytics() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sortOrder, setSortOrder] = useState("desc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 5; // Number of items per page
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     console.log("Analytics in Page Frontend");
@@ -87,6 +94,33 @@ export default function Analytics() {
               ))}
             </tbody>
           </table>
+          <div className={styles.pagination}>
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={styles.pageButton}
+            >
+              Previous
+            </button>
+
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => handlePageChange(index + 1)}
+                className={`${styles.pageButton} ${currentPage === index + 1 ? styles.activePage : ""}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={styles.pageButton}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
