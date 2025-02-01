@@ -1,17 +1,21 @@
 import styles from "./navbar.module.css";
-
 import { CiSearch } from "react-icons/ci";
 import { GoPlus } from "react-icons/go";
-
 import { getUserDetails } from "../../services";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "../../components/modal/Modal";
+import { SearchContext } from "../../context/SearchContext";
+
 export default function Navbar() {
   const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [greeting, setGreeting] = useState("");
   const [currentDate, setCurrentDate] = useState("");
+  const { searchQuery, setSearchQuery } = useContext(SearchContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -52,6 +56,14 @@ export default function Navbar() {
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
 
+  const getInitials = (name) => {
+    const initials = name
+      .split(" ")
+      .map((word) => word[0])
+      .join("");
+    return initials.toUpperCase();
+  };
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -59,14 +71,16 @@ export default function Navbar() {
     setIsModalOpen(false);
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     window.location.href = "/"; // Redirect to login page
+  };
+
+  const handleSearchKeyDown = (event) => {
+    if (event.key === "Enter") {
+      navigate("/links");
+    }
   };
 
   return (
@@ -96,11 +110,17 @@ export default function Navbar() {
 
           <div className={styles.search}>
             <CiSearch className={styles.searchIcon} />
-            <input type="text" placeholder="Search by remarks" />
+            <input
+              type="text"
+              placeholder="Search by remarks"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown} // Use onKeyDown instead of onKeyPress
+            />
           </div>
 
-          <div className={styles.profile} onClick={toggleDropdown}>
-            <img src="/assets/profile.png" alt="profile icon" />
+          <div className={styles.profile} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+            <div className={styles.profileIcon}>{getInitials(userName)}</div>
             {isDropdownOpen && (
               <div className={styles.dropdownMenu}>
                 <button onClick={handleLogout}>Log out</button>

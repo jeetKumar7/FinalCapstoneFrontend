@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Navbar from "../../components/navbar/index.jsx";
 import Sidebar from "../../components/sidebar/index.jsx";
 
 import { getlinks } from "../../services";
-
 import styles from "./links.module.css";
 import EditModal from "../../components/edit/edit.jsx";
 import DeleteModal from "../../components/delete/delete.jsx";
-
 import { RxCaretSort } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 import { LuCopy } from "react-icons/lu";
-import { FaSort } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { SearchContext } from "../../context/SearchContext";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Links() {
   const [links, setLinks] = useState({ urls: [], total: 0, page: 1, limit: 10 });
   const [sortOrder, setSortOrder] = useState("asc");
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const [filteredLinks, setFilteredLinks] = useState([]);
+  const { searchQuery } = useContext(SearchContext);
   const [currentHash, setCurrentHash] = useState(null);
   const [currentDeleteHash, setCurrentDeleteHash] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [statusSortOrder, setStatusSortOrder] = useState("asc");
 
   const openDeleteModal = (hash) => {
     setCurrentDeleteHash(hash);
@@ -44,11 +45,21 @@ export default function Links() {
   };
 
   useEffect(() => {
+    if (searchQuery) {
+      const filtered = links.urls.filter((link) => link.remarks.toLowerCase().includes(searchQuery.toLowerCase()));
+      setFilteredLinks(filtered);
+    } else {
+      setFilteredLinks(links.urls);
+    }
+  }, [searchQuery, links.urls]);
+
+  useEffect(() => {
     const fetchLinks = async () => {
       try {
         const linksData = await getlinks();
         console.log("Links:", linksData);
         setLinks(linksData);
+        setFilteredLinks(linksData.urls);
       } catch (error) {
         console.error("Failed to fetch links:", error);
       }
@@ -77,6 +88,17 @@ export default function Links() {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
+  const handleStatusSort = () => {
+    // UPDATED: Function to handle Status sorting
+    const sortedLinks = [...links.urls].sort((a, b) => {
+      const isActiveA = !a.expirationTime || new Date(a.expirationTime) > new Date();
+      const isActiveB = !b.expirationTime || new Date(b.expirationTime) > new Date();
+      return statusSortOrder === "asc" ? isActiveA - isActiveB : isActiveB - isActiveA;
+    });
+    setLinks({ ...links, urls: sortedLinks });
+    setStatusSortOrder(statusSortOrder === "asc" ? "desc" : "asc");
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { month: "short", day: "numeric", year: "numeric" };
@@ -103,17 +125,20 @@ export default function Links() {
                   <th>Short Link</th>
                   <th>Remarks</th>
                   <th>Clicks</th>
-                  <th>Status</th>
+                  <th onClick={handleStatusSort} className={styles.sortableHeader}>
+                    {" "}
+                    {/* UPDATED: Added sorting to Status column */}
+                    Status <RxCaretSort className={styles.sortIcon} /> {/* UPDATED: Added sort icon */}
+                  </th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {links.urls.length > 0 ? (
-                  links.urls.map((link) => (
+                {filteredLinks.length > 0 ? (
+                  filteredLinks.map((link) => (
                     <tr key={link._id}>
                       <td>{formatDate(link.createdAt)}</td>
                       <td>{link.destinationUrl}</td>
-
                       <td className={styles.tableCell}>
                         <div className={styles.cellContent}>
                           <span className={styles.urlText}>{`${BACKEND_URL}/api/url/${link.hash}`}</span>
@@ -137,13 +162,12 @@ export default function Links() {
                       <td>
                         <MdEdit className={styles.editIcon} onClick={() => openModal(link.hash)} />
                         <RiDeleteBinLine className={styles.deleteIcon} onClick={() => openDeleteModal(link.hash)} />
-                        {/* <button>Delete</button> */}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7">Loading Links...</td>
+                    <td colSpan="7">No Links Created</td>
                   </tr>
                 )}
               </tbody>

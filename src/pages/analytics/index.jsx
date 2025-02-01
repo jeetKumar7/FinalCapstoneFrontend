@@ -3,6 +3,7 @@ import styles from "./analytics.module.css";
 import { getAnalytics } from "../../services";
 import Navbar from "../../components/navbar/index.jsx";
 import Sidebar from "../../components/sidebar/index.jsx";
+import { RxCaretSort } from "react-icons/rx";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -10,6 +11,7 @@ export default function Analytics() {
   const [analyticsData, setAnalyticsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     console.log("Analytics in Page Frontend");
@@ -45,6 +47,16 @@ export default function Analytics() {
     return `${formattedDate} ${formattedTime}`;
   };
 
+  const sortByTimestamp = () => {
+    const sortedData = [...analyticsData].sort((a, b) => {
+      return sortOrder === "asc"
+        ? new Date(a.timestamp) - new Date(b.timestamp)
+        : new Date(b.timestamp) - new Date(a.timestamp);
+    });
+    setAnalyticsData(sortedData);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
   return (
     <div className={styles.container}>
       <Navbar />
@@ -54,7 +66,9 @@ export default function Analytics() {
           <table className={styles.analyticsTable}>
             <thead>
               <tr>
-                <th>Timestamp</th>
+                <th onClick={sortByTimestamp} style={{ cursor: "pointer" }}>
+                  Timestamp <RxCaretSort />
+                </th>
                 <th>Original Link</th>
                 <th>Short Link</th>
                 <th>IP Address</th>
@@ -65,8 +79,8 @@ export default function Analytics() {
               {analyticsData.map((entry) => (
                 <tr key={entry._id}>
                   <td>{formatDate(entry.timestamp)}</td>
-                  <td>{`${BACKEND_URL}/api/url/${entry.destinationUrl}`}</td>
-                  <td>{entry.shortUrl}</td>
+                  <td>{entry.destinationUrl}</td>
+                  <td>{`${BACKEND_URL}/api/url/${entry.shortUrl}`}</td>
                   <td>{entry.ipAddress}</td>
                   <td>{entry.device}</td>
                 </tr>
