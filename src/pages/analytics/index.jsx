@@ -83,15 +83,23 @@ export default function Analytics() {
               </tr>
             </thead>
             <tbody>
-              {analyticsData.map((entry) => (
-                <tr key={entry._id}>
-                  <td>{formatDate(entry.timestamp)}</td>
-                  <td>{entry.destinationUrl}</td>
-                  <td>{`${BACKEND_URL}/api/url/${entry.shortUrl}`}</td>
-                  <td>{entry.ipAddress}</td>
-                  <td>{entry.device}</td>
+              {analyticsData.length > 0 ? (
+                analyticsData.map((entry) => (
+                  <tr key={entry._id}>
+                    <td>{formatDate(entry.timestamp)}</td>
+                    <td>{entry.destinationUrl}</td>
+                    <td>{`${BACKEND_URL}/api/url/${entry.shortUrl}`}</td>
+                    <td>{entry.ipAddress}</td>
+                    <td>{entry.device}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center", padding: "20px" }}>
+                    No Analytics Data Found
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
           <div className={styles.pagination}>

@@ -2,11 +2,16 @@ import { useState } from "react";
 import { register } from "../../services";
 import { ToastContainer, toast } from "react-toastify";
 import stylesheet from "./register.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const notify = () => {
     toast("Succesfully Registered");
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
   const errorNotify = () => {
     toast.error("Unable to register");
@@ -116,7 +121,7 @@ export default function Register() {
           <input
             value={formData.password}
             name="password"
-            type="text"
+            type="password"
             placeholder="Password"
             onChange={handleInputChange}
           />

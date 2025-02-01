@@ -174,7 +174,9 @@ export default function Links() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7">No Links Created</td>
+                    <td colSpan="7" style={{ textAlign: "center", padding: "20px" }}>
+                      No Links Created
+                    </td>
                   </tr>
                 )}
               </tbody>
@@ -210,7 +212,7 @@ export default function Links() {
         </div>
       </div>
       <EditModal isOpen={isModalOpen} onClose={closeModal} hash={currentHash} />
-      <DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} hash={currentDeleteHash} />
+      <DeleteModal isOpen={isDeleteModalOpen} onClose={closeDeleteModal} hash={currentDeleteHash} setLinks={setLinks} />
     </div>
   );
 }

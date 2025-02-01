@@ -2,7 +2,7 @@ import "./App.css";
 import { Login, Register, Dashboard, Navbar, Links, Analytics, Settings } from "./pages/index.js";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { SearchProvider } from "./context/SearchContext";
-
+import { toast } from "react-toastify";
 function App() {
   return (
     <SearchProvider>

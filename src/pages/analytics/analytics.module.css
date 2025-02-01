@@ -39,7 +39,7 @@
 .analyticsTable td {
   background-color: white;
   font-weight: 500;
-  padding: 18px 15px;
+  padding: 12px 15px;
   border-bottom: 1px solid #dddddd1e;
   vertical-align: middle;
   white-space: nowrap; /* Prevent text from wrapping */

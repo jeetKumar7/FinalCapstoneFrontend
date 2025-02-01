@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { deleteShortUrl } from "../../services";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import styles from "./delete.module.css";
 
@@ -9,6 +11,10 @@ export default function DeleteModal({ isOpen, onClose, hash }) {
       const response = await deleteShortUrl(hash);
       console.log("Short URL deleted:", response);
       onClose();
+      toast.success("URL deleted successfully", {
+        position: "bottom-left",
+        autoClose: 2000,
+      });
     } catch (error) {
       console.error("Failed to delete short URL: (in Modal)", error);
     }
@@ -39,6 +45,7 @@ export default function DeleteModal({ isOpen, onClose, hash }) {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

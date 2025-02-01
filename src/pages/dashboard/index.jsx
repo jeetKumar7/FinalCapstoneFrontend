@@ -88,7 +88,7 @@ export default function Dashboard() {
                   <div className={styles.bar} key={entry._id}>
                     <span>{formatDateId(entry._id)}</span>
                     <div className={styles.barFill} style={{ width: `${entry.clicks}%` }}></div>
-                    <span>{entry.clicks}</span>
+                    <span>{entry.count}</span>
                   </div>
                 ))}
               </div>
@@ -103,7 +103,7 @@ export default function Dashboard() {
                     <div className={styles.bar} key={entry._id}>
                       <span>{deviceNameMapping[entry._id] || entry._id}</span>
                       <div className={styles.barFill} style={{ width: `${entry.clicks}%` }}></div>
-                      <span>{entry.clicks}</span>
+                      <span>{entry.count}</span>
                     </div>
                   ))
                 ) : (
