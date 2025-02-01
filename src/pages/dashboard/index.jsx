@@ -74,10 +74,10 @@ export default function Dashboard() {
               <h3>Date-wise Clicks</h3>
               <div className={styles.chart}>
                 {dateWiseClicks.map((entry) => (
-                  <div className={styles.bar} key={`${entry._id.year}-${entry._id.month}-${entry._id.day}`}>
-                    <span>{`${entry._id.year}-${entry._id.month}-${entry._id.day}`}</span>
-                    <div className={styles.barFill} style={{ width: `${entry.count}%` }}></div>
-                    <span>{entry.count}</span>
+                  <div className={styles.bar} key={entry._id}>
+                    <span>{entry._id}</span>
+                    <div className={styles.barFill} style={{ width: `${entry.clicks}%` }}></div>
+                    <span>{entry.clicks}</span>
                   </div>
                 ))}
               </div>
@@ -87,13 +87,17 @@ export default function Dashboard() {
             <div className={styles.card}>
               <h3>Click Devices</h3>
               <div className={styles.chart}>
-                {deviceWiseClicks.map((entry) => (
-                  <div className={styles.bar} key={entry._id}>
-                    <span>{deviceNameMapping[entry._id] || entry._id}</span>
-                    <div className={styles.barFill} style={{ width: `${entry.count}%` }}></div>
-                    <span>{entry.count}</span>
-                  </div>
-                ))}
+                {deviceWiseClicks.length > 0 ? (
+                  deviceWiseClicks.map((entry) => (
+                    <div className={styles.bar} key={entry._id}>
+                      <span>{deviceNameMapping[entry._id] || entry._id}</span>
+                      <div className={styles.barFill} style={{ width: `${entry.clicks}%` }}></div>
+                      <span>{entry.clicks}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div>No data available</div>
+                )}
               </div>
             </div>
           </div>
